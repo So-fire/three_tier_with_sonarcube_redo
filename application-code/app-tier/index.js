@@ -1,3 +1,4 @@
+require('dotenv').config();
 const transactionService = require('./TransactionService');
 const mysql = require('mysql');
 const express = require('express');
