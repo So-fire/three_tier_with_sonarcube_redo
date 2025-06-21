@@ -8,7 +8,7 @@ This is an updated code from the original code: [AWS Three Tier Web Architecture
 - [Terraform](#Terraform)
 - [Getting Started](#getting-started)
 
-## Application code
+## Application code.
 The `appliation-code` directory contains source codes for the `app-tier` and `web-tier`
 
 ## Terraform
