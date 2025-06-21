@@ -93,7 +93,7 @@ app.post('/transaction', (req, res) => {
 // GET ALL TRANSACTIONS
 app.get('/transaction',(req,res)=>{
     try{
-        var transactionList = [];
+        const transactionList = [];
        transactionService.getAllTransactions(function (results) {
             console.log("we are in the call back:");
             for (const row of results) {
