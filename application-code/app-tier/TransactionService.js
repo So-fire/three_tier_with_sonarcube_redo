@@ -49,14 +49,14 @@ function deleteAllTransactions(callback){
     }) 
 }
 
-function deleteTransactionById(id, callback){
-    const sql = `DELETE FROM transactions WHERE id = ${id}`;
+function deleteTransactionById(id, callback) {
+    const sql = 'DELETE FROM transactions WHERE id = ?'; // Use parameterized query
     con.query(sql, [id], function(err, result) {
-        if (err) throw err;
-        console.log(`Deleting transactions with id ${id}`);
-        return(callback(result));
-    }) 
+        if (err) return callback(err, null);  // Pass error to callback
+        return callback(null, result);        // Pass result if success
+    });
 }
+
 
 
 module.exports = {addTransaction ,getAllTransactions, deleteAllTransactions, findTransactionById, deleteTransactionById};
