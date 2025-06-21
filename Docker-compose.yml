@@ -16,7 +16,7 @@ services:
 
 
   app-tier:
-    image: sophizo/app-tier:latest   # ✅ Explicitly define image
+    image: sophizo/app-tier:latest   # ✅ Explicitly define image...
     build: 
       context: ./application-code/app-tier
       dockerfile: Dockerfile
