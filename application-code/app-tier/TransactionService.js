@@ -29,14 +29,15 @@ function getAllTransactions(callback){
     });
 }
 
-function findTransactionById(id,callback){
-    const mysql = `SELECT * FROM transactions WHERE id = ${id}`;
-    con.query(mysql, function(err,result){
+function findTransactionById(id, callback) {
+    const sqlQuery = `SELECT * FROM transactions WHERE id = ${id}`;
+    con.query(sqlQuery, function(err, result) {
         if (err) throw err;
-        console.log(`retrieving transactions with id ${id}`);
-        return(callback(result));
-    }) 
+        console.log(`Retrieving transaction with id ${id}`);
+        return callback(result);
+    });
 }
+
 
 function deleteAllTransactions(callback){
     const mysql = "DELETE FROM transactions";
