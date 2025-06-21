@@ -16,6 +16,7 @@ services:
 
 
   app-tier:
+    image: sophizo/app-tier:latest   # ✅ Explicitly define image
     build: 
       context: ./application-code/app-tier
       dockerfile: Dockerfile
@@ -37,7 +38,7 @@ services:
       dockerfile: Dockerfile
     container_name: web-tier
     ports:
-      - "3000:80"
+      - "80:80"
     
     depends_on:
        - app-tier
