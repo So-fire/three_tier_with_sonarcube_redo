@@ -8,13 +8,16 @@ const con = mysql.createConnection({
     database: dbcreds.DB_DATABASE
 });
 
-function addTransaction(amount,desc){
-    const mysql = `INSERT INTO \`transactions\` (\`amount\`, \`description\`) VALUES ('${amount}','${desc}')`;
-    con.query(mysql, function(err,result){
-        if (err) throw err;
-        console.log("Adding to the table should have worked");
-    }) 
-    return 200;
+function addTransaction(amount, desc, callback) {
+    const sql = "INSERT INTO `transactions` (`amount`, `description`) VALUES (?, ?)";
+    con.query(sql, [amount, desc], function(err, result) {
+        if (err) {
+            console.error("Error inserting transaction:", err);
+            return callback(err);
+        }
+        console.log("Transaction added successfully.");
+        return callback(null, result);
+    });
 }
 
 function getAllTransactions(callback){
