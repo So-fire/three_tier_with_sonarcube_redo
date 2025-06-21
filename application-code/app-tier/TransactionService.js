@@ -49,7 +49,7 @@ function deleteAllTransactions(callback){
 }
 
 function deleteTransactionById(id, callback){
-    var mysql = `DELETE FROM transactions WHERE id = ${id}`;
+    const mysql = `DELETE FROM transactions WHERE id = ${id}`;
     con.query(mysql, function(err,result){
         if (err) throw err;
         console.log(`Deleting transactions with id ${id}`);
