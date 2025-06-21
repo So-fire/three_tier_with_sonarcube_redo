@@ -139,9 +139,9 @@ app.get('/transaction/id',(req,res)=>{
     try{
         transactionService.findTransactionById(req.body.id,function(result){
             res.statusCode = 200;
-            var id = result[0].id;
-            var amt = result[0].amount;
-            var desc= result[0].desc;
+            const id = result[0].id;
+            const amt = result[0].amount;
+            const desc= result[0].desc;
             res.json({"id":id,"amount":amt,"desc":desc});
         });
 
