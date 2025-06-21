@@ -29,15 +29,16 @@ function getAllTransactions(callback){
     });
 }
 
-function findTransactionById(id, callback) {
-    const sqlQuery = `SELECT * FROM transactions WHERE id = ${id}`;
-    con.query(sqlQuery, function(err, result) {
+function findTransactionById(id,callback){
+       const sql = "SELECT * FROM transactions WHERE id = ?";
+       con.query(sql, [id], function(err, result) {
+    // var mysql = `SELECT * FROM transactions WHERE id = ${id}`;   #block wit vulnerability spotted by sonarcube
+    // con.query(mysql, function(err,result){                       #block wit vulnerability spotted by sonarcube
         if (err) throw err;
-        console.log(`Retrieving transaction with id ${id}`);
-        return callback(result);
-    });
+        console.log(`retrieving transactions with id ${id}`);
+        return(callback(result));
+    }) 
 }
-
 
 function deleteAllTransactions(callback){
     const mysql = "DELETE FROM transactions";
