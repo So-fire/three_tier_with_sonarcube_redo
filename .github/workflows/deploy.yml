@@ -25,15 +25,26 @@ jobs:
           unzip sonar-scanner.zip -d $HOME
           echo "$HOME/sonar-scanner-7.2.1.78450-linux/bin" >> $GITHUB_PATH
 
-    
-      - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@master
-        with:
-          args: >
-            -Dsonar.projectKey=So-fire_three_tier_with_sonarcube_redo 
-            -Dsonar.organization=so-fire
+      
+      # Run SonarCloud Scan
+      - name: SonarCloud Scan
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          sonar-scanner \
+            -Dsonar.projectKey=So-fire_three_tier_with_sonarcube_redo \
+            -Dsonar.organization=so-fire \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.login=$SONAR_TOKEN
+    
+      # - name: SonarQube Scan
+      #   uses: SonarSource/sonarqube-scan-action@master
+      #   with:
+      #     args: >
+      #       -Dsonar.projectKey=So-fire_three_tier_with_sonarcube_redo 
+      #       -Dsonar.organization=so-fire
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   build_push:
     needs: sonar
