@@ -11,6 +11,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Install Java (required by SonarScanner)
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      # Install latest SonarScanner
+      - name: Install SonarScanner
+        run: |
+          curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-7.2.1.78450-linux.zip
+          unzip sonar-scanner.zip -d $HOME
+          echo "$HOME/sonar-scanner-7.2.1.78450-linux/bin" >> $GITHUB_PATH
+
+    
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@master
         with:
