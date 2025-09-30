@@ -18,14 +18,13 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      # Install latest SonarScanner
+      # Install stable SonarScanner CLI (5.x line)
       - name: Install SonarScanner
         run: |
-          curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-7.2.1.78450-linux.zip
+          curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
           unzip sonar-scanner.zip -d $HOME
-          echo "$HOME/sonar-scanner-7.2.1.78450-linux/bin" >> $GITHUB_PATH
+          echo "$HOME/sonar-scanner-5.0.1.3006-linux/bin" >> $GITHUB_PATH
 
-      
       # Run SonarCloud Scan
       - name: SonarCloud Scan
         env:
@@ -36,15 +35,7 @@ jobs:
             -Dsonar.organization=so-fire \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=$SONAR_TOKEN
-    
-      # - name: SonarQube Scan
-      #   uses: SonarSource/sonarqube-scan-action@master
-      #   with:
-      #     args: >
-      #       -Dsonar.projectKey=So-fire_three_tier_with_sonarcube_redo 
-      #       -Dsonar.organization=so-fire
-      #   env:
-      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
 
   build_push:
     needs: sonar
